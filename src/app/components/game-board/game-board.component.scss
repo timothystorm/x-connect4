@@ -11,12 +11,12 @@
 }
 
 .cell {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   position: relative;
   overflow: hidden;
   float: left;
-  padding: 12px;
+  padding: 5px;
 }
 
 .cell::before {
