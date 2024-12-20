@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, ElementRef, ViewChild} from '@angula
 import {NgClass, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
-let nextUniqueId: number = 1;
+let nextUniqueId = 1;
 const colors: string[] = ['bg-gold', 'bg-red', 'bg-blue'];
 
 @Component({
@@ -18,11 +18,11 @@ const colors: string[] = ['bg-gold', 'bg-red', 'bg-blue'];
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayerComponent {
-  isEdit: boolean = false;
+  isEdit = false;
 
   private readonly playerId = nextUniqueId++;
   private readonly playerColor: string = colors[(this.playerId + 1) % colors.length];
-  private playerName: string = `Player ${this.playerId}`;
+  private playerName = `Player ${this.playerId}`;
 
   @ViewChild('nameInput')
   set nameInput(nameInput: ElementRef) {

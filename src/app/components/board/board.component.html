@@ -1,0 +1,12 @@
+<div class="board">
+  <span class="row" *ngFor="let rows of board.grid">
+    <div *ngFor="let cell of rows; let columnIndex = index"
+         class="cell"
+         [ngClass]="cell != null ? '__'+cell.id : 'blank'"
+         (click)="dropChip(columnIndex)"
+         (keyup.space)="dropChip(columnIndex)"
+         tabindex="0"
+    ></div>
+  </span>
+</div>
+
