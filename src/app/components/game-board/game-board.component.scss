@@ -27,16 +27,14 @@
   border-radius: 50%;
   box-sizing: border-box;
   background-color: #222222;
-  border: 6px inset orange;
+  border: 4px inset white;
   background-size: 4px 4px;
 }
 
 .__x::before {
-  background-image: repeating-linear-gradient(-45deg, #B22222, #8B0000 4px, transparent 1px, transparent 6px);
-  //background-color: red;
+  background-color: #FF0000;
 }
 
 .__y::before {
-  background-image: repeating-linear-gradient(-45deg, #FFD700, #FF8C00 4px, transparent 1px, transparent 6px);
-  //background-color: gold;
+  background-color: #FFD700;
 }

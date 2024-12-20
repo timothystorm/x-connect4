@@ -31,16 +31,9 @@ export class GameBoardComponent implements OnDestroy {
   }
 
   dropChip(columnIndex: number): void {
-    switch (this.user) {
-      case 'x':
-        this.gameService.dropChip(columnIndex, this.user);
-        this.user = 'y';
-        break;
-      case 'y':
-        this.gameService.dropChip(columnIndex, this.user);
-        this.user = 'x';
-        break;
-    }
+    this.gameService.dropChip(columnIndex, this.user)
+      .then(() => this.user = (this.user === 'x') ? 'y' : 'x')
+      .catch(() => alert('column is full, please pick another'));
   }
 
   reset(): void {

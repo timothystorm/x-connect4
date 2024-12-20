@@ -10,19 +10,19 @@ export class GameService {
   // @TODO need to make these configurable
   private readonly _cols: number = 6;
   private readonly _rows: number = 7;
+  private readonly _slots: number = this._cols * this._rows;
 
   constructor() {
     this._grid = this.initGrid();
   }
 
-  dropChip(column: number, playerId: any): Promise<boolean> {
-    return new Promise((resolve) => {
+  dropChip(column: number, playerId: any): Promise<void> {
+    return new Promise((resolve, reject) => {
       if (this.isValidDrop(column)) {
         const row = this.findEmptyRowIndex(column);
         this._grid[row][column] = playerId;
-        resolve(true);
-      }
-      resolve(false);
+        resolve();
+      } else reject();
     });
   }
 
