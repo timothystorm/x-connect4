@@ -1,11 +1,12 @@
 import {WinnerStrategy} from './winner-strategy';
 import {Injectable} from '@angular/core';
+import {GridType} from '../../domain/types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WinnerVerticalService extends WinnerStrategy {
-  isWinner(grid: any[][], playerId: any): boolean {
+  isWinner(grid: GridType, playerId: string): boolean {
 
     for(let col = 0; col < grid[0].length; col++) {
       for (let row = 0; row < grid.length - 3; row++){

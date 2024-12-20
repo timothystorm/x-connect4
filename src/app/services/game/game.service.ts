@@ -2,12 +2,13 @@ import {Inject, Injectable, Optional} from '@angular/core';
 import {findLastIndex} from '../../utils/array.utils';
 import {WINNER_STRATEGY} from '../winner/winner.token';
 import {WinnerStrategy} from '../winner/winner-strategy';
+import {GridType} from '../../domain/types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  private _grid!: any[][];
+  private _grid!: GridType;
 
   // @TODO need to make these configurable
   private readonly _cols: number = 6;
@@ -22,7 +23,7 @@ export class GameService {
     this._grid = this.initGrid();
   }
 
-  dropChip(column: number, playerId: any): Promise<void> {
+  dropChip(column: number, playerId: string): Promise<void> {
     return new Promise((resolve, reject) => {
       if (this.isValidDrop(column)) {
         const row = this.findEmptyRowIndex(column);
@@ -37,25 +38,25 @@ export class GameService {
     return this._filledSlots >= this._slots;
   }
 
-  isWinner(playerId: any): boolean {
+  isWinner(playerId: string): boolean {
     return this.winnerStrategyChain
       ? this.winnerStrategyChain.some((strategy) => strategy.isWinner(this._grid, playerId))
       : false;
   }
 
-  reset(): any[][] {
+  reset(): GridType {
     return (this._grid = this.initGrid());
   }
 
-  get grid(): number[][] {
+  get grid(): GridType {
     return this._grid;
   }
 
   /**
    * fill grid with null which means the slots are "empty"
    */
-  private initGrid(): any[][] {
-    return Array(this._rows).fill(0).map(_ => Array(this._cols).fill(null));
+  private initGrid(): GridType {
+    return Array(this._rows).fill(0).map(() => Array(this._cols).fill(null));
   }
 
   private isValidDrop(column: number): boolean {

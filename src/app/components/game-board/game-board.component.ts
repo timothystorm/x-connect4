@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {Subject} from 'rxjs';
 import {NgClass, NgForOf} from '@angular/common';
 import {GameService} from '../../services/game/game.service';
+import {GridType} from '../../domain/types';
 
 @Component({
   selector: 'app-game-board',
@@ -17,7 +18,7 @@ export class GameBoardComponent implements OnDestroy {
   private readonly _done = new Subject<void>();
   private user: 'x' | 'y' = 'x';
 
-  grid: number[][];
+  grid: GridType;
 
   constructor(
     private gameService: GameService
