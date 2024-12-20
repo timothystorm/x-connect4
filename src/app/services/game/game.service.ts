@@ -1,5 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 import {findLastIndex} from '../../utils/array.utils';
+import {WINNER_STRATEGY} from '../winner/winner.token';
+import {WinnerStrategy} from '../winner/winner-strategy';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,11 @@ export class GameService {
   private readonly _rows: number = 7;
   private readonly _slots: number = this._cols * this._rows;
 
-  constructor() {
+  private _filledSlots = 0;
+
+  constructor(
+    @Optional() @Inject(WINNER_STRATEGY) private winnerStrategyChain?: WinnerStrategy[]
+  ) {
     this._grid = this.initGrid();
   }
 
@@ -21,17 +27,28 @@ export class GameService {
       if (this.isValidDrop(column)) {
         const row = this.findEmptyRowIndex(column);
         this._grid[row][column] = playerId;
+        this._filledSlots++;
         resolve();
       } else reject();
     });
   }
 
-  get grid(): number[][] {
-    return this._grid;
+  isGridFull(): boolean {
+    return this._filledSlots >= this._slots;
+  }
+
+  isWinner(playerId: any): boolean {
+    return this.winnerStrategyChain
+      ? this.winnerStrategyChain.some((strategy) => strategy.isWinner(this._grid, playerId))
+      : false;
   }
 
   reset(): any[][] {
     return (this._grid = this.initGrid());
+  }
+
+  get grid(): number[][] {
+    return this._grid;
   }
 
   /**

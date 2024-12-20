@@ -32,7 +32,11 @@ export class GameBoardComponent implements OnDestroy {
 
   dropChip(columnIndex: number): void {
     this.gameService.dropChip(columnIndex, this.user)
-      .then(() => this.user = (this.user === 'x') ? 'y' : 'x')
+      .then(() => {
+        if (this.gameService.isWinner(this.user)) console.log('winner');
+        else if(this.gameService.isGridFull()) console.log('... grid full, nobody won');
+        else this.user = (this.user === 'x') ? 'y' : 'x';
+      })
       .catch(() => alert('column is full, please pick another'));
   }
 
