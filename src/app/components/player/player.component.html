@@ -1,0 +1,10 @@
+<div class="chip bg-grey">
+  <span class="dot" [ngClass]="color"></span>
+  <span *ngIf="!isEdit" (click)="isEdit = true">{{name}}</span>
+  <input #nameInput
+         (keydown.enter)="isEdit = false"
+         *ngIf="isEdit"
+         [(ngModel)]="name"
+         type="text"
+  />
+</div>

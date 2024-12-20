@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.bg-gold {
+  background-color: #FFD700;
+}
+
+.bg-red {
+  background-color: #B22222;
+}
+
+.bg-blue {
+  background-color: #1E90FF;
+}
+
+.bg-grey {
+  background-color: #D3D3D3;
+}
+
+.fg-white {
+  color: #ffff;
+}
+
+.border-ridge {
+  border-style: ridge;
+}
