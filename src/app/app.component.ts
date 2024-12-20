@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {PlayerComponent} from './components/player/player.component';
-import {GameService} from './services/game/game.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +10,4 @@ import {GameService} from './services/game/game.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(
-    private gameService: GameService
-  ) {
-
-  }
 }

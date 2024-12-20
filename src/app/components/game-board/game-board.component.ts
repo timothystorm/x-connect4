@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Subject} from 'rxjs';
 import {NgClass, NgForOf} from '@angular/common';
 import {GameService} from '../../services/game/game.service';
@@ -20,8 +20,7 @@ export class GameBoardComponent implements OnDestroy {
   grid: number[][];
 
   constructor(
-    private gameService: GameService,
-    private cdr: ChangeDetectorRef
+    private gameService: GameService
   ) {
     this.grid = this.gameService.grid;
   }
@@ -32,7 +31,7 @@ export class GameBoardComponent implements OnDestroy {
   }
 
   dropChip(columnIndex: number): void {
-    switch(this.user) {
+    switch (this.user) {
       case 'x':
         this.gameService.dropChip(columnIndex, this.user);
         this.user = 'y';
@@ -47,6 +46,5 @@ export class GameBoardComponent implements OnDestroy {
   reset(): void {
     this.grid = this.gameService.reset();
     this.user = 'x';
-    // this.cdr.markForCheck();
   }
 }
