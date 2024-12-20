@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Player} from '../../domain/player';
-import {Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: "root"
 })
 export class PlayerService {
-  private playerOneStore = new Subject<Player>();
-  private playerTwoStore = new Subject<Player>();
+  private playerOneStore = new BehaviorSubject<Player | null>(null);
+  private playerTwoStore = new BehaviorSubject<Player | null>(null);
 
   playerOne$ = this.playerOneStore.asObservable();
   playerTwo$ = this.playerTwoStore.asObservable();

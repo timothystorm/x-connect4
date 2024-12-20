@@ -1,5 +1,5 @@
-import {Component, Inject, Optional} from '@angular/core';
-import {NgClass, NgForOf} from '@angular/common';
+import {Component, Inject, Input, Optional} from '@angular/core';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {Board} from '../../domain/board';
 import {Player} from '../../domain/player';
 import {WINNER_STRATEGY} from '../../services/winner/winner-strategy.token';
@@ -14,8 +14,10 @@ import {WinnerAscendingDiagonalStrategy} from '../../services/winner/winner-asce
   standalone: true,
   imports: [
     NgForOf,
-    NgClass
+    NgClass,
+    NgIf
   ],
+  exportAs: 'BoardComponent',
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   providers: [
@@ -26,26 +28,28 @@ import {WinnerAscendingDiagonalStrategy} from '../../services/winner/winner-asce
   ]
 })
 export class BoardComponent {
-  board: Board;
-  currentPlayer: Player;
-  plays: number = 0;
-
-  private players: Player[] = [{id: 'x', name: 'player 1'}, {id: 'y', name: 'player 2'}]
+  @Input() board?: Board;
+  @Input() playerOne?: Player;
+  @Input() playerTwo?: Player;
+  @Input() currentPlayer?: Player;
 
   constructor(
     @Optional() @Inject(WINNER_STRATEGY) private winnerStrategyChain?: WinnerStrategy[],
   ) {
-    this.board = new Board(6, 7);
-    this.currentPlayer = this.players[0];
   }
 
   dropChip(column: number): void {
-    this.board.drop(column, this.currentPlayer)
-      .then(() => {
-        if (this.winnerStrategyChain?.some(s => s.isWinner(this.board, this.currentPlayer))) {
-          console.log(`winner - ${this.currentPlayer.name}`)
+    if (this.currentPlayer) {
+      console.log('dropped')
+      this.board?.drop(column, this.currentPlayer).then(() => {
+        if (this.winnerStrategyChain?.some(s => s.isWinner(this.board!, this.currentPlayer))) {
+          console.log(`winner - ${this.currentPlayer?.name}`)
         }
-      })
-      .then(() => this.currentPlayer = this.players[(++this.plays) % this.players.length]);
+
+        this.currentPlayer = this.currentPlayer === this.playerOne ? this.playerTwo : this.playerOne
+      }).catch(() => {
+        console.warn('illegal move')
+      });
+    }
   }
 }

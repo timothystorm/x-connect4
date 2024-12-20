@@ -1,0 +1,11 @@
+.container {
+  width: 460px;
+  margin: auto;
+}
+
+.players {
+  display: grid;
+  grid-template-columns: 50%  50%;
+  grid-template-rows: auto;
+  margin: 0 auto 20px auto;
+}
