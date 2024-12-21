@@ -42,7 +42,7 @@ jobs:
 
       # Step 7: Run build script
       - name: Build
-        run: npm run build # Assumes there's a build script in package.json
+        run: npm run build-dreamhost # Assumes there's a build script in package.json
 
       # Step 8: Deploy built files via FTP
       - name: Deploy via FTP
