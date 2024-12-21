@@ -53,5 +53,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/ # The local directory where the build output is located (adjust if necessary)
           server-dir: ${{ secrets.FTP_PATH }} # The remote directory on the server
-          protocol: ftps # Change to 'ftps' for secure FTP if needed
+          protocol: ftp # Change to 'ftps' for secure FTP if needed
           port: 21
