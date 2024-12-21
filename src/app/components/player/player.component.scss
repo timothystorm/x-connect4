@@ -1,23 +1,38 @@
+$chip-width: 150px;
+
 .chip {
   display: inline-block;
   padding: 5px 26px 5px 32px;
-  height: 50px;
-  font-size: 16px;
+  height: 56px;
+  font-size: 20px;
   line-height: 50px;
-  border-radius: 25px;
-  min-width: 100px;
+  border-radius: 12px;
+  min-width: $chip-width;
   margin: 0 10px 0 2px;
+  border: 4px solid #2b3f3f;
+  background-color: #3873ae;
+  color: #ffffff;
+  font-weight: bolder;
 }
 
 .dot {
   float: left;
   height: 50px;
   width: 50px;
-  margin: 0 10px 0 -25px;
+  margin: 0 20px 0 -25px;
   border-radius: 50%;
   display: inline-block;
+  border: outset 4px;
 }
 
-input {
-  max-width: 60px;
+dot:active {
+  border: inset 2px;
+}
+
+.editable:hover {
+  cursor: pointer;
+}
+
+input[type=text] {
+  max-width: $chip-width * 0.5;
 }

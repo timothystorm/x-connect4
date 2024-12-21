@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="players">
+    <span class="player"
+          style="justify-self: start"
+          (click)="currentPlayer = playerOne"
+          (keyup.enter)="currentPlayer = playerOne"
+          tabindex="0">
+      <app-player [player]="playerOne"></app-player>
+    </span>
+    <span class="player"
+          style="justify-self: end"
+          (click)="currentPlayer = playerTwo"
+          (keyup.enter)="currentPlayer = playerTwo"
+          tabindex="0">
+      <app-player [player]="playerTwo"></app-player>
+    </span>
+  </div>
+
+  <app-board
+    *ngIf="currentPlayer && board"
+    [board]="board"
+    [playerOne]="playerOne"
+    [playerTwo]="playerTwo"
+    [currentPlayer]="currentPlayer"></app-board>
+</div>

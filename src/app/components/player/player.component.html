@@ -1,10 +1,17 @@
-<div class="chip bg-grey">
-  <span class="dot" [ngClass]="color"></span>
-  <span *ngIf="!isEdit" (click)="isEdit = true" (keyup.space)="isEdit = true" tabindex="0">{{name}}</span>
+<div class="chip">
+  <span class="dot no-select" [style]="{backgroundColor: player.color}"></span>
+  <span *ngIf="!isEditName"
+        (click)="$event.stopPropagation(); toggleEdit(true)"
+        (keyup.space)="toggleEdit(true)"
+        [class]="disabled ? '' : 'editable'"
+        tabindex="0">
+    {{ player.name }}
+  </span>
   <input #nameInput
-         (keydown.enter)="isEdit = false"
-         *ngIf="isEdit"
-         [(ngModel)]="name"
+         (keydown.enter)="toggleEdit(false)"
+         (blur)="toggleEdit(false)"
+         [(ngModel)]="player.name"
+         *ngIf="isEditName"
          type="text"
-  />
+         placeholder="Player Name"/>
 </div>

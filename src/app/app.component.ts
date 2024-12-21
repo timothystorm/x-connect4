@@ -6,8 +6,7 @@ import {PlayerComponent} from './components/player/player.component';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, PlayerComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
 }

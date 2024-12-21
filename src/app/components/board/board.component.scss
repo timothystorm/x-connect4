@@ -8,6 +8,7 @@
 .row {
   display: grid;
   grid-template-columns: repeat(6, auto);
+  justify-content: center;
 }
 
 .cell {
@@ -16,25 +17,13 @@
   position: relative;
   overflow: hidden;
   float: left;
-  padding: 5px;
+  padding: 10px;
 }
 
-.cell::before {
-  content: '';
-  display: block;
+.chip {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  box-sizing: border-box;
   background-color: #222222;
   border: 4px inset white;
-  background-size: 4px 4px;
-}
-
-.__x::before {
-  background-color: #FF0000;
-}
-
-.__y::before {
-  background-color: #FFD700;
+  border-radius: 50%;
 }

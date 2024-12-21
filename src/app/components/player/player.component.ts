@@ -1,9 +1,7 @@
-import {ChangeDetectionStrategy, Component, ElementRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {NgClass, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-
-let nextUniqueId = 1;
-const colors: string[] = ['bg-gold', 'bg-red', 'bg-blue'];
+import {Player} from '../../domain/player';
 
 @Component({
   selector: 'app-player',
@@ -18,30 +16,18 @@ const colors: string[] = ['bg-gold', 'bg-red', 'bg-blue'];
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayerComponent {
-  isEdit = false;
+  isEditName = false;
 
-  private readonly playerId = nextUniqueId++;
-  private readonly playerColor: string = colors[(this.playerId + 1) % colors.length];
-  private playerName = `Player ${this.playerId}`;
+  @Input() player!: Player;
+
+  @Input() disabled = false;
 
   @ViewChild('nameInput')
   set nameInput(nameInput: ElementRef) {
     if (nameInput) setTimeout(() => nameInput.nativeElement.select())
   };
 
-  get color(): string {
-    return this.playerColor;
-  }
-
-  get id(): number {
-    return this.playerId;
-  }
-
-  get name(): string {
-    return this.playerName;
-  }
-
-  set name(name: string) {
-    if (name != null) this.playerName = name;
+  toggleEdit(edit?: boolean): void {
+    this.isEditName = (edit ?? !this.isEditName);
   }
 }

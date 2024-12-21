@@ -9,5 +9,5 @@ import {Board} from '../../domain/board';
  */
 @Injectable()
 export abstract class WinnerStrategy {
-  abstract isWinner(board: Board, player: Player): boolean;
+  abstract isWinner(board: Board, player?: Player): boolean;
 }
