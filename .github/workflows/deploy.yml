@@ -25,11 +25,11 @@ jobs:
         id: get_tag
         run: echo "TAG_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      # Step 4: Load environment variables from file (.env)
-      - name: Set environment variables from Dotenv
-        uses: c-py/action-dotenv-to-setenv@v5
-        with:
-          env-file: .env
+      #      # Step 4: Load environment variables from file (.env)
+      #      - name: Set environment variables from Dotenv
+      #        uses: c-py/action-dotenv-to-setenv@v5
+      #        with:
+      #          env-file: .env
 
       # Step 5: Load environment variables from GitHub Secrets
       - name: Set environment variables from GitHub Secrets
